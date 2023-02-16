@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riccardobordin <riccardobordin@student.    +#+  +:+       +#+        */
+/*   By: rbordin <rbordin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 10:28:12 by riccardobor       #+#    #+#             */
-/*   Updated: 2023/02/12 14:27:43 by riccardobor      ###   ########.fr       */
+/*   Updated: 2023/02/14 13:26:58 by rbordin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "ft_printf.h"
 
 char ft_check_args(const char *s1)
 {    int i;
@@ -23,31 +23,30 @@ char ft_check_args(const char *s1)
     i++;
     return (s1[i]);
 }
-void ft_middle_step(va_list args, char indications)
+int ft_middle_step(va_list args, char indications)
 {
+    int len;
+    
     if (!args || !indications)
-        return ;
-
+        return (0);
     if (indications == "c")
-        ft_putchar(args);
+        len += ft_putchar(va_args(args, int);
     else if (indications == "s")
-        ft_putstr(args);
-    else if (indications == "d")
-        ft_putnbr(args);
+        len += ft_putstr(va_args(args, char *);
+    else if (indications == "d" || indications == "i")
+        len += ft_putnbr(va_args(args, long);
     else if (indications == "p")
-        ft_putpointer(args);
-    else if (indications == "i")
-        ft_printbaseten(args);
+        len += ft_putpointer(va_args(args, unsigned long long);
     else if (indications == "u")
-        ft_printunsignedint(args);
+        len += ft_printunsignedint(va_args(args, unsigned int);
     else if (indications == "x")
-        ft_printhexadecimallower(args);
+        len += ft_printhexadecimallower(va_args(args, int);
     else if (indications == "X")
-        ft_printhexadecimalupper(args);
+        len += ft_printhexadecimalupper(va_args(args, int);
     else if (indications == "%")
-        write(1, "%", 1);
+        len += write(1, "%", 1);
 
-    return ;
+    return (len);
 }
 
 int ft_printf(const char *s1, ...)
